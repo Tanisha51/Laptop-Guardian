@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <title>Laptop Guardian — Device Security</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div id="authScreen" class="auth-screen">
+    <div class="auth-art"><div class="auth-orb orb-one"></div><div class="auth-orb orb-two"></div><div class="auth-brand"><div class="brand-mark">LG</div><span>LAPTOP GUARDIAN</span></div><div class="auth-copy"><p class="eyebrow">PERSONAL DEVICE SECURITY</p><h1>Your laptop.<br><span>Your control.</span></h1><p>One secure place to monitor paired Windows devices, review activity, and protect your session.</p><div class="auth-points"><span>✓ Owner-only access</span><span>✓ Live device heartbeat</span><span>✓ Audited actions</span></div></div><div class="auth-art-foot">LOCAL DEVELOPMENT BUILD · HTTPS REQUIRED FOR REMOTE DEPLOYMENT</div></div>
+    <main class="auth-panel"><div class="mobile-brand"><div class="brand-mark">LG</div><span>LAPTOP GUARDIAN</span></div><div class="auth-form-wrap"><div class="mini-shield">⌑</div><p class="eyebrow">OWNER PORTAL</p><h2>Welcome back</h2><p class="subtext">Sign in with the owner account already registered on this installation.</p>
+      <form id="loginForm" novalidate>
+        <label for="email">Owner email</label><input id="email" type="email" name="email" autocomplete="username" required maxlength="254" placeholder="you@example.com">
+        <label for="password">Password</label><input id="password" type="password" name="password" autocomplete="current-password" required minlength="12" maxlength="72" placeholder="Your owner password">
+        <button id="loginButton" class="btn primary full" type="submit"><span>Sign in securely</span><span aria-hidden="true">↗</span></button>
+      </form>
+      <button id="registerButton" class="text-button" type="button">Create first owner account</button>
+      <button id="guestModeButton" class="btn secondary full guest-entry" type="button">Continue in Guest Mode (read-only)</button>
+      <div id="authMessage" class="notice" role="status" aria-live="polite"></div>
+      <div class="auth-security"><span class="pulse-dot"></span><span>Protected session · 2-hour expiry</span></div>
+    </div><p class="panel-foot">Laptop Guardian <span>•</span> Local development</p></main>
+  </div>
+
+  <div id="appShell" class="app-shell hidden">
+    <aside id="sidebar" class="sidebar">
+      <div class="side-brand"><div class="brand-mark">LG</div><div><strong>Laptop Guardian</strong><small>DEVICE SECURITY</small></div></div>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="overview"><span class="nav-icon">◫</span> Overview</button>
+        <button class="nav-item" data-view="devices"><span class="nav-icon">▣</span> My devices <span id="navDeviceCount" class="nav-count">0</span></button>
+        <button class="nav-item" data-view="activity"><span class="nav-icon">◷</span> Activity log</button>
+        <button class="nav-item" data-view="assistant"><span class="nav-icon">✦</span> Guardian AI</button>
+        <button class="nav-item" data-view="security"><span class="nav-icon">⬡</span> Security</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="local-card"><div class="local-icon">⌁</div><div><strong>Local protection</strong><small>Agent runs on your PC</small></div><span class="tiny-status"></span></div><button id="sidebarLogout" class="logout-link"><span>↪</span> Sign out</button></div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar"><div class="topbar-left"><button id="menuButton" class="icon-button mobile-only" aria-label="Toggle navigation">☰</button><div><p class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumbName">Overview</strong></p><h1 id="pageTitle">Overview</h1></div></div><div class="topbar-right"><div class="server-pill"><span id="serverDot" class="pulse-dot"></span><span id="serverStatus">Checking server</span></div><div class="avatar" id="avatarInitials">OW</div><div class="owner-label"><strong id="accessRole">Owner</strong><small id="ownerEmail">—</small></div><button id="logoutButton" class="icon-button logout-icon" title="Sign out" aria-label="Sign out">↪</button></div></header>
+
+      <section id="view-overview" class="view active-view">
+        <div class="welcome-row"><div><p class="eyebrow">SECURITY OVERVIEW</p><h2>Good to have you back.</h2><p class="subtext">A live view of devices paired to this Laptop Guardian installation.</p></div><button id="pairDeviceButton" data-owner-only class="btn primary"><span>＋</span> Pair a device</button></div>
+        <div class="stat-grid"><article class="stat-card"><div class="stat-top"><span>Total devices</span><span class="stat-icon blue">▣</span></div><div id="statTotal" class="stat-value">—</div><div class="stat-foot">Paired with this owner account</div></article><article class="stat-card"><div class="stat-top"><span>Online now</span><span class="stat-icon green">⌁</span></div><div id="statOnline" class="stat-value">—</div><div class="stat-foot"><span class="green-text">Live heartbeat</span> from agent</div></article><article class="stat-card"><div class="stat-top"><span>Offline</span><span class="stat-icon amber">◷</span></div><div id="statOffline" class="stat-value">—</div><div class="stat-foot">No heartbeat in the last 35 sec</div></article><article class="stat-card"><div class="stat-top"><span>Security alerts</span><span class="stat-icon violet">◇</span></div><div id="statAlerts" class="stat-value">—</div><div class="stat-foot">Recorded alerts in recent activity</div></article></div>
+        <div class="content-grid"><section class="panel device-panel"><div class="panel-heading"><div><h3>Your devices</h3><p>Paired Windows agents and their latest reported status.</p></div><button class="link-button" data-go="devices">View all <span>→</span></button></div><div id="overviewDevices" class="device-list"><div class="empty-state"><div class="empty-icon">▣</div><strong>No devices paired yet</strong><p>Pair the Windows Agent to start receiving real device status.</p><button class="btn primary" data-pair>Pair your first device</button></div></div></section>
+          <section class="panel activity-panel"><div class="panel-heading"><div><h3>Recent activity</h3><p>Owner and device events recorded by the server.</p></div><button class="link-button" data-go="activity">View log <span>→</span></button></div><div id="overviewActivity" class="activity-list"><div class="empty-small">No activity recorded yet.</div></div></section></div>
+        <section class="banner"><div class="banner-symbol">⌘</div><div class="banner-copy"><strong>Connect your Windows Agent</strong><p>Pair this installation with a Windows agent to report hostname, Windows version, uptime, memory and online status.</p></div><button id="pairBannerButton" data-owner-only class="btn banner-btn">Set up agent <span>→</span></button></section>
+      </section>
+
+      <section id="view-devices" class="view"><div class="section-intro"><div><p class="eyebrow">DEVICE MANAGEMENT</p><h2>My devices</h2><p class="subtext">Only devices paired with your owner account appear here.</p></div><button id="pairDeviceButton2" data-owner-only class="btn primary">＋ Pair a device</button></div><div id="allDevices" class="device-cards"><div class="empty-state"><div class="empty-icon">▣</div><strong>No devices paired</strong><p>Use the pairing flow to connect the Windows Agent.</p></div></div></section>
+
+      <section id="view-activity" class="view"><div class="section-intro"><div><p class="eyebrow">AUDIT TRAIL</p><h2>Activity log</h2><p class="subtext">A record of logins, pairing, commands and agent results.</p></div><button id="refreshActivity" class="btn secondary">↻ Refresh</button></div><section class="panel table-panel"><div class="table-wrap"><table><thead><tr><th>EVENT</th><th>DETAIL</th><th>DEVICE</th><th>TIME</th></tr></thead><tbody id="activityTable"><tr><td colspan="4" class="empty-cell">No activity yet.</td></tr></tbody></table></div></section></section>
+
+      <section id="view-assistant" class="view">
+        <div class="section-intro"><div><p class="eyebrow">CONTEXT-AWARE TROUBLESHOOTING</p><h2>Guardian AI</h2><p class="subtext">Ask about device status, heartbeat, lock commands, or email alerts.</p></div></div>
+        <section class="panel assistant-panel"><div class="assistant-intro"><div class="assistant-mark">✦</div><div><h3>Guardian Assistant</h3><p>Uses your current device and activity data locally. It does not send your device details to an external AI service.</p></div></div>
+          <label for="assistantQuestion" class="assistant-label">What would you like to check?</label>
+          <textarea id="assistantQuestion" rows="3" maxlength="500" placeholder="Example: Why is my laptop offline?"></textarea>
+          <div class="assistant-prompts"><button class="mini-button" data-assistant-prompt="Why is my device offline?">Device offline?</button><button class="mini-button" data-assistant-prompt="Did the lock command work?">Lock command status</button><button class="mini-button" data-assistant-prompt="Are email alerts configured?">Email alerts</button></div>
+          <button id="assistantAsk" class="btn primary assistant-ask">Ask Guardian</button>
+          <div id="assistantAnswer" class="assistant-answer" aria-live="polite">Your answer will appear here.</div>
+          <p class="assistant-note">Prototype note: this is a local, rule-based assistant, not a connected large-language model. It summarizes live project data and offers troubleshooting guidance.</p>
+        </section>
+      </section>
+
+      <section id="view-security" class="view"><div class="section-intro"><div><p class="eyebrow">ACCESS & PROTECTION</p><h2>Security center</h2><p class="subtext">Current local configuration and practical security notes.</p></div></div><div class="security-grid"><article class="panel security-card"><div class="security-card-icon green">✓</div><h3>Owner authentication</h3><p>Passwords are verified against a bcrypt hash. Dashboard API routes require a signed, expiring session token.</p><span class="state-label good">ACTIVE</span></article><article class="panel security-card"><div class="security-card-icon blue">⌁</div><h3>Agent pairing</h3><p>Pairing codes expire after five minutes. Each paired agent gets a revocable private token.</p><span class="state-label" id="pairingState">READY</span></article><article class="panel security-card"><div class="security-card-icon amber">✉</div><h3>Email delivery</h3><p id="emailStatusText">Checking email provider configuration…</p><span class="state-label" id="emailState">CHECKING</span><button id="testEmailButton" data-owner-only class="btn secondary full email-test-button" type="button">Send test email</button></article><article class="panel security-card"><div class="security-card-icon violet">⌑</div><h3>Remote access</h3><p>This build listens on localhost only. For access from another network, deploy behind HTTPS and configure the agent API URL securely.</p><span class="state-label warn">LOCAL ONLY</span></article></div><div class="notice info-notice"><strong>Windows lock command</strong><p>The Lock Windows action locks the active Windows session on the paired machine. It does not bypass the Windows sign-in screen or remotely unlock the machine.</p></div></section>
+
+      <footer class="app-footer"><span>© Laptop Guardian</span><span>Local development build <i></i> <span id="footerApi">API checking</span></span></footer>
+    </main>
+  </div>
+
+  <dialog id="pairDialog" class="modal"><form method="dialog" class="modal-close-form"><button class="modal-close" aria-label="Close">×</button></form><div class="modal-icon">⌁</div><p class="eyebrow">WINDOWS AGENT SETUP</p><h2>Pair a new device</h2><p class="subtext">Generate a single-use code, then run the agent on the Windows laptop you want to pair.</p><div id="pairCodeWrap" class="pair-code-wrap hidden"><span class="pair-label">YOUR PAIRING CODE</span><div id="pairCode" class="pair-code">------</div><p id="pairExpiry" class="pair-expiry">Expires in 5 minutes</p></div><div id="pairInstructions" class="pair-instructions"><strong>Before you start</strong><ol><li>Keep this dashboard open.</li><li>Open a terminal in the <code>windows-agent</code> folder.</li><li>Run <code>node agent.js pair YOUR_CODE</code> using the code generated here.</li></ol></div><div id="pairMessage" class="notice" role="status"></div><div class="modal-actions"><button id="generatePairCode" class="btn primary full" type="button">Generate pairing code</button><button id="closePairDialog" class="btn secondary full" type="button">Done</button></div></dialog>
+
+  <dialog id="confirmDialog" class="modal small-modal"><form method="dialog" class="modal-close-form"><button class="modal-close" aria-label="Close">×</button></form><div class="modal-icon warning-icon">!</div><h2 id="confirmTitle">Confirm action</h2><p id="confirmText" class="subtext">Are you sure?</p><div class="modal-actions"><button id="confirmCancel" class="btn secondary full" type="button">Cancel</button><button id="confirmProceed" class="btn danger full" type="button">Confirm</button></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

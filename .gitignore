@@ -1,0 +1,19 @@
+backend/.env
+backend/data/users.json
+backend/data/devices.json
+backend/data/events.json
+backend/node_modules/
+windows-agent/.agent-config.json
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies and generated files
+node_modules/
+
+# Local data and backup files
+backend/data/
+backend/*.backup.js
+backend/*.js.backup
